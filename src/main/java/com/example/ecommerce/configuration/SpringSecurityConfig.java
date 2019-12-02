@@ -27,7 +27,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
     @Qualifier("customUserDetailsService")
     UserDetailsService userDetailsService;
-	
+
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -36,6 +36,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/customer/**").access("hasRole('ROLE_USER') or hasRole('ROLE_UNAUTH')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/checkout").access("hasRole('ROLE_USER')")
+                .and()
+                .authorizeRequests().antMatchers("/h2/**").permitAll()
                 .and()
             .formLogin()
                 .loginPage("/login")
@@ -47,9 +49,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
             .logout()
             	.logoutSuccessUrl("/login?logout")
-                .permitAll()
-        		.and()
-        	.csrf();
+                .permitAll();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Autowired
