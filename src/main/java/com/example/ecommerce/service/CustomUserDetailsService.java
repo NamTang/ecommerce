@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (customer == null) {
             throw new UsernameNotFoundException("Username not found");
         }
+
         return new org.springframework.security.core.userdetails.User(customer.getEmail(), customer.getPassword(), customer.isEnabled(), true, true,
                 true, getGrantedAuthorities(customer));
     }
@@ -37,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         for (Role role : customer.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
         }
+
         return authorities;
     }
 }
