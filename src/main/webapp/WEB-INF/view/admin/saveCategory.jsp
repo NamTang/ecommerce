@@ -8,7 +8,7 @@
             <h1>${title}</h1>
         </div>
 
-        <form:form action="/admin/ca/s" method="post" commandName="category">
+        <form:form action="/admin/ca/s" method="post" modelAttribute="category">
 
 			<form:hidden path="categoryId" value="${category.categoryId}" />
             <div class="form-group"><form:errors path="mainCategoryName" cssStyle="color: red" />

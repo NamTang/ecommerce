@@ -9,7 +9,7 @@
             <h1>${title}</h1>
         </div>
 
-        <form:form action="/admin/pd/s" method="post" commandName="product" enctype="multipart/form-data">
+        <form:form action="/admin/pd/s" method="post" modelAttribute="product" enctype="multipart/form-data">
         
         	<form:hidden path="productViews" value="${product.productViews}" />
             <form:hidden path="productDate" id="productDate" value="${now}" />
